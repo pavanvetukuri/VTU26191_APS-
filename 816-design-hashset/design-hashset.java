@@ -3,7 +3,7 @@ class MyHashSet {
     private boolean[] set;
 
     public MyHashSet() {
-        set = new boolean[1000001]; // keys from 0 to 10^6
+        set = new boolean[1000001]; // index = key
     }
 
     public void add(int key) {
