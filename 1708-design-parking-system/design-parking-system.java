@@ -1,8 +1,5 @@
 class ParkingSystem {
-
-    int big;
-    int medium;
-    int small;
+    int big, medium, small;
 
     public ParkingSystem(int big, int medium, int small) {
         this.big = big;
@@ -21,7 +18,7 @@ class ParkingSystem {
                 medium--;
                 return true;
             }
-        } else if (carType == 3) { // small
+        } else { // small
             if (small > 0) {
                 small--;
                 return true;
