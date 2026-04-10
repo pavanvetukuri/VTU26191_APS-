@@ -2,10 +2,10 @@ import java.util.*;
 
 class UndergroundSystem {
 
-    // store check-in details
+    // id -> (station, time)
     private Map<Integer, Pair> checkInMap;
 
-    // store route data: total time & count
+    // route -> (totalTime, count)
     private Map<String, int[]> routeMap;
 
     public UndergroundSystem() {
@@ -20,34 +20,35 @@ class UndergroundSystem {
     public void checkOut(int id, String stationName, int t) {
         Pair p = checkInMap.get(id);
 
-        String startStation = p.station;
+        String start = p.station;
         int startTime = p.time;
 
-        String route = startStation + "-" + stationName;
+        String route = start + "->" + stationName;
         int travelTime = t - startTime;
 
         routeMap.putIfAbsent(route, new int[2]);
 
         routeMap.get(route)[0] += travelTime; // total time
         routeMap.get(route)[1] += 1;          // count
+
+        checkInMap.remove(id);
     }
 
     public double getAverageTime(String startStation, String endStation) {
-        String route = startStation + "-" + endStation;
-
+        String route = startStation + "->" + endStation;
         int[] data = routeMap.get(route);
 
         return (double) data[0] / data[1];
     }
-}
 
-// helper class
-class Pair {
-    String station;
-    int time;
+    // Helper class
+    class Pair {
+        String station;
+        int time;
 
-    Pair(String station, int time) {
-        this.station = station;
-        this.time = time;
+        Pair(String station, int time) {
+            this.station = station;
+            this.time = time;
+        }
     }
 }
